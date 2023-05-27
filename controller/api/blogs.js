@@ -1,25 +1,37 @@
 const router = require('express').Router();
-const { Blogs, Comments } = require('../models');
+const { User, Blogs, Comments } = require('../../models');
 
 // GET all blogs for homepage
 router.get('/', async (req, res) => {
   try {
-    const dbGalleryData = await Blogs.findAll({
+    const dbBlogsData = await Blogs.findAll({
+      attribute: ["id", "title", "content", "created_at"],
+      order: [["created_at", "DESC"]],
       include: [
         {
-          model: Painting,
-          attributes: ['filename', 'description'],
+          model: User,
+          attributes: ["username"]
+        },
+        {
+          model: Comments,
+          attributes: ["id", "comment", "user_id", "blog_id", "created_at"],
+          include: {
+            model: User,
+            attributes: ["username"]
+          }
         },
       ],
     });
 
-    const galleries = dbGalleryData.map((gallery) =>
-      gallery.get({ plain: true })
-    );
-    res.render('homepage', {
-      galleries,
-      loggedIn: req.session.loggedIn,
-    });
+    // const blogs = dbBlogsData.map((blog) =>
+    //   blog.get({ plain: true })
+    // );
+    // res.render('homepage', {
+    //   blogs,
+    //   loggedIn: req.session.loggedIn,
+    // });
+
+    res.json(dbBlogsData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -27,52 +39,90 @@ router.get('/', async (req, res) => {
 });
 
 // GET one gallery
-router.get('/post/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
+    const dbBlogData = await Blogs.findByPk(req.params.id, {
+      attribute: ["id", "title", "content", "created_at"],
       include: [
         {
-          model: Painting,
-          attributes: [
-            'id',
-            'title',
-            'artist',
-            'exhibition_date',
-            'filename',
-            'description',
-          ],
+          model: User,
+          attributes: ["username"]
+        },
+        {
+          model: Comments,
+          attributes: ["id", "comment", "user_id", "blog_id", "created_at"],
+          include: {
+            model: User,
+            attributes: ["username"]
+          }
         },
       ],
     });
 
-    const gallery = dbGalleryData.get({ plain: true });
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
+    // const blog = dbBlogData.get({ plain: true });
+    // res.render('blog', { blog, loggedIn: req.session.loggedIn });
+
+    res.json(dbBlogData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
-// GET one painting
-router.get('/post/:id', async (req, res) => {
+// POST A NEW BLOG 
+router.post('/', async (req, res) => {
   try {
-    const dbPaintingData = await Painting.findByPk(req.params.id);
-
-    const painting = dbPaintingData.get({ plain: true });
-    res.render('painting', { painting, loggedIn: req.session.loggedIn });
+    // create a new category
+    const newBlog = await Blogs.create({
+      title: req.body.title,
+      content: req.body.content,
+      user_id: req.session.user_id
+    });
+    res.status(201).json(newBlog);
   } catch (err) {
-    console.log(err);
+    res.status(400).json(err);
+  }
+});
+
+// UPDATE A BLOG BASED ON ID
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedBlog = await Blogs.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    if (!updatedBlog[0]) {
+      res.status(404).json({ message: 'No post found with this id!' });
+      return;
+    }
+    res.json({ message: 'Post updated successfully' });
+  } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Login route
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
+router.delete('/:id', async (req, res) => {
+  try {
+    // delete a category by its `id` value
+    const deletedBlog = await Blogs.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!deletedBlog) {
+      res.status(404).json({ message: 'Post not found' });
+      return;
+    }
+    res.json({ message: 'Post was deleted successfully!' });
+  } catch (err) {
+    res.status(500).json(err);
   }
-  res.render('login');
 });
 
 module.exports = router;

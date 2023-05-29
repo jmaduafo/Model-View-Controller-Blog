@@ -8,10 +8,11 @@
     <title>CodeStart</title>
 </head>
 <body>
-    {{< header}}
+    {{> header}}
     <main>
-        {{ body }}
+        {{{body}}}
     </main>
+
     {{#if loggedIn}}
     <script src="/js/logout.js"></script>
     {{/if}}

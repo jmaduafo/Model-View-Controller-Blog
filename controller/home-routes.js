@@ -94,7 +94,7 @@ Post.findOne({
     const post = dbPostData.get({ plain: true });
 
     //pass data to the template
-    res.render('single-post', {
+    res.render('post-id', {
     post, 
     loggedIn: req.session.loggedIn
     });

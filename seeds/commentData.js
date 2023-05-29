@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { Comments } = require('../models');
 
 const commentData = [
     {
@@ -27,82 +27,82 @@ const commentData = [
         blog_id: "",
     },
     {
-        comment: "",
+        comment: "Awesome!",
         user_id: 2,
-        blog_id: "",
+        blog_id: 2,
     },
     {
-        comment: "",
+        comment: "Amazing!",
         user_id: 2,
-        blog_id: "",
+        blog_id: 2,
     },
     {
-        comment: "",
+        comment: "Thanks for this advice",
         user_id: 2,
-        blog_id: "",
+        blog_id: 2,
     },
     {
-        comment: "",
+        comment: "Very helpful",
         user_id: 2,
-        blog_id: "",
+        blog_id: 2,
     },
     {
-        comment: "",
+        comment: "You've helped me so much",
         user_id: 2,
-        blog_id: "",
+        blog_id: 2,
     },
     {
-        comment: "",
-        user_id: 3,
-        blog_id: "",
-    },
-    {
-        comment: "",
+        comment: "I know what you mean!",
         user_id: 3,
         blog_id: 3,
     },
     {
-        comment: "",
+        comment: "I am a troll :o",
         user_id: 3,
         blog_id: 3,
     },
     {
-        comment: "",
+        comment: "I know right??",
         user_id: 3,
         blog_id: 3,
     },
     {
-        comment: "",
+        comment: "Your message made me elevate",
         user_id: 3,
         blog_id: 3,
     },
     {
-        comment: "",
+        comment: "Okay cool...",
+        user_id: 3,
+        blog_id: 3,
+    },
+    {
+        comment: "Bad take :/",
         user_id: 4,
         blog_id: 4,
     },
     {
-        comment: "",
+        comment: "I understand but at the same time, I'm lost",
         user_id: 4,
         blog_id: 4,
     },
     {
-        comment: "",
+        comment: "Was this necessary?",
         user_id: 4,
         blog_id: 4,
     },
     {
-        comment: "",
+        comment: "I think you might have to rethink on this",
         user_id: 4,
         blog_id: 4,
     },
     {
-        comment: "",
+        comment: "...",
         user_id: 4,
         blog_id: 4,
     },
     {
-        comment: "",
+        comment: "What is this?",
         user_id: 5,
         blog_id: 5,
     },
@@ -110,6 +110,6 @@ const commentData = [
     
 ]
 
-const seedUsers = () => User.bulkCreate(userData);
+const seedComments = () => Comments.bulkCreate(commentData);
 
-module.exports = seedUsers;
+module.exports = seedComments;

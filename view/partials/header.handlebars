@@ -1,0 +1,15 @@
+<header>
+    <nav>
+       <div class="blog-nav">
+            {{#if loggedIn}}
+            <a href="/"><i class='bx bxs-home bx-sm'></i></a>
+            <a href="/dashboard/"><i class='bx bxs-user-circle bx-sm'></i></a>
+            <a href="/"><i class='bx bxs-log-out-circle bx-sm' ></i></a>
+            {{else}}
+            <a href="/"><i class='bx bxs-home bx-sm'></i></a>
+            <a href="/dashboard/"><i class='bx bxs-user-circle bx-sm'></i></a>
+            <a href="/login"><i class='bx bxs-log-in-circle bx-sm' ></i></a>
+            {{/if}}
+       </div> 
+    </nav>
+</header>

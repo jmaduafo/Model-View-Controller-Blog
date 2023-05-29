@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // POST A NEW COMMENT
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
       // create a new category
       const newComment = await Comments.create({
@@ -53,7 +53,8 @@ router.post('/', async (req, res) => {
         },
         {
           where: {
-            id: req.params.id,
+            id: req.session.user_id,
+            blog_id: req.session.blog_id
           },
         }
       );

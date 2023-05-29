@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Blogs, Comments } = require('../../models');
+const withAuth = require("../../utils/auth")
 
 // GET all blogs for homepage
 router.get('/', async (req, res) => {
@@ -69,7 +70,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 // POST A NEW BLOG 
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     // create a new category
     const newBlog = await Blogs.create({

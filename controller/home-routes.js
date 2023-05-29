@@ -1,31 +1,10 @@
 const router = require("express").Router();
-const { Blogs, User, Comments } = require("../models");
-const sequelize = require("../config/connection");
+const { User, Blogs, Comments } = require("../models");
 
 // GET all blogs for homepage
 router.get('/', async (req, res) => {
     try {
-      const dbBlogsData = await Blogs.findAll({
-        attribute: ["id", "title", "content", "created_at"],
-        include: [
-          {
-            model: User,
-            attributes: ["username"]
-          },
-          {
-            model: Comments,
-            attributes: ["id", "comment", "user_id", "blog_id", "created_at"],
-            include: {
-              model: User,
-              attributes: ["username"]
-            }
-          },
-          {
-            model: User,
-            attributes: ["username"]
-        }
-        ],
-      });
+      const dbBlogsData = await Blogs.findAll();
   
       const blogs = dbBlogsData.map((blog) =>
         blog.get({ plain: true })
@@ -56,7 +35,7 @@ router.get('/post/:id', (req, res) => {
         ],
         include: [
         {
-            model: Comment,
+            model: Comments,
             attributes: [
             'id',
             'comment',
@@ -97,22 +76,10 @@ router.get('/post/:id', (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
+      res.redirect('/');
+      return;
     }
-    
-    // RENDER LOGIN PAGE WHEN "/login" IS REACHED
     res.render('login');
-});
-
-router.get('/register', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
-    
-    // RENDER SIGNUP PAGE WHEN "/register" IS REACHED
-    res.render('signup');
 });
 
 module.exports = router;

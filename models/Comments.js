@@ -12,7 +12,7 @@ Comments.init(
       autoIncrement: true,
     },
     comment: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         len: [1]
@@ -33,6 +33,16 @@ Comments.init(
         model: 'blog',
         key: 'id'
       }
+    },
+    created_at: {
+      field: "created_at",
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updated_at: {
+      field: 'updated_at',
+      type: DataTypes.DATE,
+      allowNull: false,
     },
   },
   {

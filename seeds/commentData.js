@@ -24,7 +24,7 @@ const commentData = [
     {
         comment: "Wow, amazing!",
         user_id: 1,
-        blog_id: "",
+        blog_id: 1,
     },
     {
         comment: "Awesome!",

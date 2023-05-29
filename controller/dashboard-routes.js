@@ -61,7 +61,7 @@ router.get('/modify/:id', (req, res) => {
                 attributes: ['username']
             },
             {
-                model: Comment,
+                model: Comments,
                 attributes: [
                 'id',
                 'comment',

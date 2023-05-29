@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one gallery
+// GET one blog
 router.get('/:id', async (req, res) => {
   try {
     const dbBlogData = await Blogs.findByPk(req.params.id, {

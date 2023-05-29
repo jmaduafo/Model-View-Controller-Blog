@@ -1,6 +1,46 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Blogs, Comments } = require('../../models');
 
+// CREATE ALL USERS
+router.get('/', async (req, res) => {
+  try {
+    const dbUserData = await User.findAll({
+      attributes: { exclude: ["password"]}
+    });
+
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET ONE USER
+router.get('/', async (req, res) => {
+  try {
+    const dbUserData = await User.findByPk({
+      attributes: { exclude: ["password"]},
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: Blogs,
+          attributes: ['id', 'title', 'post_text', 'created_at']
+        },
+        {
+          model: Comments,
+          attributes: ['id', 'comment_text', 'created_at']
+        }
+      ]
+    });
+
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 // CREATE NEW USER
 router.post('/', async (req, res) => {
   try {

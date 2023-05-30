@@ -50,7 +50,6 @@ router.get('/modify/:id', (req, res) => {
         },
 
         attributes: [
-        'id',
         'title',
         'body'
         ],
@@ -62,7 +61,6 @@ router.get('/modify/:id', (req, res) => {
             {
                 model: Comments,
                 attributes: [
-                'id',
                 'comment',
                 ],
                 include: {

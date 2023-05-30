@@ -3,7 +3,7 @@
     --header: #F5D6D6;
     --blush: #FFEAEA;
     --name-icon: #E8C1C8;
-    --letters: #2A1B04;
+    --text: #2A1B04;
 }
 * {
     box-sizing: border-box;
@@ -13,4 +13,14 @@
 
 body {
     background-color: var(--background);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+p {
+    font-size: 14px;
+}
+
+button:hover {
+    cursor: pointer;
 }

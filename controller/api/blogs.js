@@ -2,87 +2,86 @@ const router = require('express').Router();
 const { User, Blogs, Comments } = require('../../models');
 const withAuth = require("../../utils/auth")
 
-// // GET all blogs for homepage
-// router.get('/', async (req, res) => {
-//   try {
-//     const dbBlogsData = await Blogs.findAll({
-//       attribute: ["id", "title", "content"],
-//       order: [["created_at", "DESC"]],
-//       include: [
-//         {
-//           model: User,
-//           attributes: ["username"]
-//         },
-//         {
-//           model: Comments,
-//           attributes: ["id", "comment", "user_id", "blog_id"],
-//           include: {
-//             model: User,
-//             attributes: ["username"]
-//           }
-//         },
-//       ],
-//     });
+// GET all blogs for homepage
+router.get('/', async (req, res) => {
+  try {
+    const dbBlogsData = await Blogs.findAll({
+      attribute: ["title", "body"],
+      // order: [["created_at", "DESC"]],
+      include: [
+        {
+          model: User,
+          attributes: ["username"]
+        },
+        {
+          model: Comments,
+          attributes: ["comment"],
+          include: {
+            model: User,
+            attributes: ["username"]
+          }
+        },
+      ],
+    });
 
-//     // const blogs = dbBlogsData.map((blog) =>
-//     //   blog.get({ plain: true })
-//     // );
-//     // res.render('homepage', {
-//     //   blogs,
-//     //   loggedIn: req.session.loggedIn,
-//     // });
+    // const blogs = dbBlogsData.map((blog) =>
+    //   blog.get({ plain: true })
+    // );
+    // res.render('homepage', {
+    //   blogs,
+    //   loggedIn: req.session.loggedIn,
+    // });
 
-//     res.json(dbBlogsData);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
+    res.json(dbBlogsData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
-// // GET one blog
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const dbBlogData = await Blogs.findByPk(req.params.id, {
-//       attribute: ["id", "title", "content", "created_at"],
-//       include: [
-//         {
-//           model: User,
-//           attributes: ["username"]
-//         },
-//         {
-//           model: Comments,
-//           attributes: ["id", "comment", "user_id", "blog_id", "created_at"],
-//           include: {
-//             model: User,
-//             attributes: ["username"]
-//           }
-//         },
-//       ],
-//     });
+// GET one blog
+router.get('/:id', async (req, res) => {
+  try {
+    const dbBlogData = await Blogs.findByPk(req.params.id, {
+      attribute: ["title", "body"],
+      include: [
+        {
+          model: User,
+          attributes: ["username"]
+        },
+        {
+          model: Comments,
+          attributes: ["comment"],
+          include: {
+            model: User,
+            attributes: ["username"]
+          }
+        },
+      ],
+    });
 
-//     // const blog = dbBlogData.get({ plain: true });
-//     // res.render('blog', { blog, loggedIn: req.session.loggedIn });
+    // const blog = dbBlogData.get({ plain: true });
+    // res.render('blog', { blog, loggedIn: req.session.loggedIn });
 
-//     res.json(dbBlogData);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
-// // POST A NEW BLOG 
-// router.post('/', withAuth, async (req, res) => {
-//   try {
-//     // create a new category
-//     const newBlog = await Blogs.create({
-//       title: req.body.title,
-//       content: req.body.content,
-//       user_id: req.session.user_id
-//     });
-//     res.status(201).json(newBlog);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+    res.json(dbBlogData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+// POST A NEW BLOG 
+router.post('/', withAuth, async (req, res) => {
+  try {
+    // create a new category
+    const newBlog = await Blogs.create({
+      title: req.body.title,
+      body: req.body.content
+    });
+    res.status(201).json(newBlog);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 // UPDATE A BLOG BASED ON ID
 router.put('/:id', async (req, res) => {

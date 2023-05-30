@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET ONE USER
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const dbUserData = await User.findByPk({
       attributes: { exclude: ["password"]},
@@ -26,11 +26,11 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Blogs,
-          attributes: ['id', 'title', 'post_text', 'created_at']
+          attributes: ['title', 'body']
         },
         {
           model: Comments,
-          attributes: ['id', 'comment_text', 'created_at']
+          attributes: ['comment']
         }
       ]
     });

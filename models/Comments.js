@@ -18,25 +18,26 @@ Comments.init(
         len: [1]
       }
     },
-    // user_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: 'user',
-    //     key: 'id'
-    //   }
-    // },
-    // blog_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: 'blog',
-    //     key: 'id'
-    //   }
-    // },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
+    },
+    blog_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'blogs',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'comment',

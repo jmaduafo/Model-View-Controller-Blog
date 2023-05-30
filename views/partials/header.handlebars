@@ -1,0 +1,33 @@
+<header>
+    <nav>
+       <div class="blog-nav">
+            <div class="nav-home">
+                <a href="/"><i class='bx bxs-home bx-md'></i></a>
+                <div class="nav-text">
+                    <p>Home</p>
+                </div>
+            </div>
+            <div class="nav-dashboard">
+                <a href="/dashboard/"><i class='bx bxs-user-circle bx-md'></i></a>
+                <div class="nav-text">
+                    <p>Profile</p>
+                </div>
+            </div>
+            {{#if loggedIn}}
+            <div class="nav-logout">
+                <a href="/"><i class='bx bxs-log-out-circle bx-md' ></i></a>
+                <div class="nav-text">
+                    <p>Logout</p>
+                </div>
+            </div>
+            {{else}}
+            <div class="nav-login">
+                <a href="/login"><i class='bx bxs-log-in-circle bx-md' ></i></a>
+                <div class="nav-text">
+                    <p>Log In</p>
+                </div>
+            </div>
+            {{/if}}
+       </div> 
+    </nav>
+</header>

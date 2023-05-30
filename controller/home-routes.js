@@ -5,11 +5,11 @@ const { User, Blogs, Comments } = require("../models");
 router.get('/', async (req, res) => {
     try {
       const dbBlogsData = await Blogs.findAll({
-        attributes: ["id", "title", "body"],
+        attributes: ["title", "body"],
         include: [
           {
             model: Comments,
-            attributes: ["id", "comment"],
+            attributes: ["comment"],
             include: {
               model: User,
               attributes: ["username"]
@@ -45,7 +45,6 @@ router.get('/post/:id', (req, res) => {
         },
 
         attributes: [
-        'id',
         'title',
         'body',
         ],
@@ -53,7 +52,6 @@ router.get('/post/:id', (req, res) => {
         {
             model: Comments,
             attributes: [
-            'id',
             'comment',
             ],
             include: {
@@ -93,6 +91,11 @@ router.get('/login', (req, res) => {
       return;
     }
     res.render('login');
+});
+
+router.get('/register', (req, res) => {
+    
+    res.render("signup");
 });
 
 module.exports = router;

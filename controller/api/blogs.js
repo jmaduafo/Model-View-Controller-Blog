@@ -6,7 +6,7 @@ const withAuth = require("../../utils/auth")
 router.get('/', async (req, res) => {
   try {
     const dbBlogsData = await Blogs.findAll({
-      attribute: ["title", "body"],
+      attribute: ['id', "title", "body", "user_id"],
       // order: [["created_at", "DESC"]],
       include: [
         {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         },
         {
           model: Comments,
-          attributes: ["comment"],
+          attributes: ['id', "comment", "user_id", "blog_id"],
           include: {
             model: User,
             attributes: ["username"]
@@ -43,18 +43,18 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const dbBlogData = await Blogs.findByPk(req.params.id, {
-      attribute: ["title", "body"],
+      attribute: ["id", "title", "body", "user_id"],
       include: [
         {
           model: User,
-          attributes: ["username"]
+          attributes: ["id", "username"]
         },
         {
           model: Comments,
-          attributes: ["comment"],
+          attributes: ["id", "comment", "user_id", "blog_id"],
           include: {
             model: User,
-            attributes: ["username"]
+            attributes: ["id", "username"]
           }
         },
       ],
@@ -75,7 +75,8 @@ router.post('/', withAuth, async (req, res) => {
     // create a new category
     const newBlog = await Blogs.create({
       title: req.body.title,
-      body: req.body.body
+      body: req.body.body,
+      user_id: req.body.user_id
     });
     res.status(201).json(newBlog);
   } catch (err) {
@@ -90,6 +91,7 @@ router.put('/:id', async (req, res) => {
       {
         title: req.body.title,
         body: req.body.body,
+        user_id: req.body.user_id,
       },
       {
         where: {

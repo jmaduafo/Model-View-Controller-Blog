@@ -3,16 +3,28 @@ const Blogs = require('./Blogs');
 const Comments = require('./Comments');
 
 //Associations
-User.hasMany(Blogs);
+User.hasMany(Blogs, {
+    foreignKey: "user_id"
+});
 
-Blogs.belongsTo(User);
+Blogs.belongsTo(User, {
+    foreignKey: "user_id"
+});
 
-Comments.belongsTo(User);
+Comments.belongsTo(User, {
+    foreignKey: "user_id"
+});
 
-Comments.belongsTo(Blogs);
+Comments.belongsTo(Blogs, {
+    foreignKey: "blog_id"
+});
 
-User.hasMany(Comments);
+User.hasMany(Comments, {
+    foreignKey: "user_id"
+});
 
-Blogs.hasMany(Comments);
+Blogs.hasMany(Comments, {
+    foreignKey: "blog_id"
+});
 
 module.exports = { User, Blogs, Comments };

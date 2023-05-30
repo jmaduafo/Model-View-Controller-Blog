@@ -35,6 +35,8 @@ router.post('/', withAuth, async (req, res) => {
       // create a new category
       const newComment = await Comments.create({
         comment: req.body.comment,
+        user_id: req.body.user_id,
+        blog_id: req.body.blog_id,
       });
       res.status(201).json(newComment);
     } catch (err) {
@@ -48,6 +50,8 @@ router.post('/', withAuth, async (req, res) => {
       const updatedComment = await Comments.update(
         {
           comment: req.body.comment,
+          user_id: req.body.user_id,
+          blog_id: req.body.blog_id,
         },
         {
           where: {

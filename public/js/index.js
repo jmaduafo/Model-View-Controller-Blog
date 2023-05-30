@@ -2,6 +2,9 @@ const blogComment = document.querySelector(".blog-comment-count");
 const blogIcon = document.querySelector("#arrow-icon");
 const userCircle = document.querySelector('.user-circle');
 
+const commentIcon = document.querySelector('.bxs-comment-detail');
+const homeComments = document.querySelector('.home-comments');
+
 var commentCount = 0;
 
 function arrowSwitch() {
@@ -18,4 +21,10 @@ function arrowSwitch() {
 
 arrowSwitch();
 
-console.log()
+console.log(commentIcon);
+// for (let i = 0; i < commentIcon.length; i++) {
+//     commentIcon[i].addEventListener("click", function() {
+//         homeComments[i].setAttribute
+//     })
+// }
+

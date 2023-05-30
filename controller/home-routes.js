@@ -5,11 +5,11 @@ const { User, Blogs, Comments } = require("../models");
 router.get('/', async (req, res) => {
     try {
       const dbBlogsData = await Blogs.findAll({
-        attributes: ["title", "body"],
+        attributes: ["id", "title", "body", "user_id"],
         include: [
           {
             model: Comments,
-            attributes: ["comment"],
+            attributes: ["id", "comment", "user_id", "blog_id"],
             include: {
               model: User,
               attributes: ["username"]
@@ -27,7 +27,8 @@ router.get('/', async (req, res) => {
       );
       // RENDER HOMEPAGE WITH BLOG POSTS AND IF YOU'RE LOGGED IN
       res.render('homepage', {
-        blogs
+        blogs,
+        loggedIn: req.session.loggedIn
       });
       
       
@@ -45,14 +46,19 @@ router.get('/post/:id', (req, res) => {
         },
 
         attributes: [
+        'id',
         'title',
         'body',
+        'user_id'
         ],
         include: [
         {
             model: Comments,
             attributes: [
+            'id',
             'comment',
+            'user_id',
+            'blog_id'
             ],
             include: {
                 model: User,

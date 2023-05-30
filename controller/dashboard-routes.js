@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         where: {
             id: req.session.id
         },
-        attributes: ["title", "body"],
+        attributes: ["id", "title", "body", "user_id"],
         // order: [["created_at", "DESC"]],
         include: [
           {
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
           },
           {
             model: Comments,
-            attributes: ["comment"],
+            attributes: ["id", "comment", "user_id", "blog_id"],
             include: {
               model: User,
               attributes: ["username"]
@@ -50,8 +50,10 @@ router.get('/modify/:id', (req, res) => {
         },
 
         attributes: [
+        'id',
         'title',
-        'body'
+        'body',
+        'user_id'
         ],
         include: [
             {
@@ -61,7 +63,10 @@ router.get('/modify/:id', (req, res) => {
             {
                 model: Comments,
                 attributes: [
+                'id',
                 'comment',
+                'user_id',
+                'blog_id'
                 ],
                 include: {
                     model: User,

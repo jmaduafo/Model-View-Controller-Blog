@@ -1,7 +1,13 @@
 <div class="top-banner">
+    <a href="/dashboard">
     <div class="user-circle">
-        <p class="user-circle">d</p>
+        {{#if loggedIn}}
+        <p class="user-name">d</p>
+        {{else}}
+        <p class="user-name">?</p>
+        {{/if}}
     </div>
+    </a>
     <div class="create-blog">
         <i class='bx bxs-paper-plane'></i>
         <p>Create a Blog</p>

@@ -5,7 +5,20 @@ const { User, Blogs, Comments } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const dbUserData = await User.findAll({
-      attributes: { exclude: ["password"]}
+      attributes: { exclude: ["password"]},
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: Blogs,
+          attributes: ['id', 'title', 'body', 'user_id']
+        },
+        {
+          model: Comments,
+          attributes: ['id', 'comment', 'user_id', 'blog_id']
+        }
+      ]
     });
 
     res.status(200).json(dbUserData);
@@ -26,11 +39,11 @@ router.get('/:id', async (req, res) => {
       include: [
         {
           model: Blogs,
-          attributes: ['title', 'body']
+          attributes: ['id', 'title', 'body', 'user_id']
         },
         {
           model: Comments,
-          attributes: ['comment']
+          attributes: ['id', 'comment', 'user_id', 'blog_id']
         }
       ]
     });

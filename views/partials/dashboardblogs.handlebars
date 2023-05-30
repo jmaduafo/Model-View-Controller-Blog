@@ -1,0 +1,22 @@
+<section>
+    {{#if loggedIn}}
+    <div class="dashboard-container">
+        <div class="dashboard-content"> 
+            <div class="dashboard-access">
+                <h2>Hi!</h2>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="dashboard-message">
+        <div class="login-message">
+            <div class="message-text">
+                <p>You must be logged in to view the dashboard.</p></p>
+            </div>
+            <div class="message-button">
+                <a href="/login"><button>LOG IN</button></a>
+            </div>
+        </div> 
+    </div>
+    {{/if}}
+</section>

@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
       const dbBlogsData = await Blogs.findAll({
 
         where: {
-            user_id: req.session.user_id
+            id: req.session.id
         },
         attributes: ["title", "body"],
         // order: [["created_at", "DESC"]],

@@ -1,5 +1,6 @@
 const blogComment = document.querySelector(".blog-comment-count");
-const blogIcon = document.querySelector("#arrow-icon")
+const blogIcon = document.querySelector("#arrow-icon");
+const userCircle = document.querySelector('.user-circle');
 
 var commentCount = 0;
 
@@ -17,3 +18,4 @@ function arrowSwitch() {
 
 arrowSwitch();
 
+console.log()

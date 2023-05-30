@@ -75,7 +75,7 @@ router.post('/', withAuth, async (req, res) => {
     // create a new category
     const newBlog = await Blogs.create({
       title: req.body.title,
-      body: req.body.content
+      body: req.body.body
     });
     res.status(201).json(newBlog);
   } catch (err) {

@@ -1,0 +1,47 @@
+.dashboard-container {
+    width: 100vw;
+}
+
+.dashboard-content {
+    width: 35%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.dashboard-message {
+    width: 100vw;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------DASHBOARD PAGE LOGIN MESSAGE--------- */
+.login-message {
+    width: 30%;
+    background-color: white;
+    padding: 30px 80px;
+    min-height: 10em;
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.message-text {
+    margin-bottom: 20px;
+}
+
+.login-message p {
+    font-size: 18px;
+}
+
+.message-button button {
+    background-color: var(--header);
+    padding: 10px 50px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+}

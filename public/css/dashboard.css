@@ -55,3 +55,34 @@
     margin-top: 10em;
 }
 
+.dashboard-textarea {
+    width: 100%;
+    background-color: var(--header);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 2em 0;
+}
+
+.dashboard-text {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dashboard-text textarea {
+    width: 70%;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    opacity: .7;
+    padding: 10px;
+}
+
+.dashboard-text button {
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    padding: 5px 20px;
+    background-color: white;
+}
+

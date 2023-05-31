@@ -2,16 +2,16 @@
 <div class="home-blog-card">
     <div class="top-section">
         <div class="blog-title">
-            <h2>{{title}}</h2>
+            <h2>{{blog.title}}</h2>
         </div>
         <div class="blog-user-created">
-            <p>{{user.username}}</p>
-            <p>5 days ago</p>
+            <p>{{blog.user.username}}</p>
+            {{!-- <p>5 days ago</p> --}}
         </div>
     </div>
     <div class="middle-section">
         <div class="blog-body">
-            <p>{{body}}</p>
+            <p>{{blog.body}}</p>
         </div>
     </div>
     <div class="bottom-section">
@@ -23,28 +23,30 @@
         </div>
     </div>
     <div class="home-comments">
-        {{#if loggedIn}}
+        {{#if ../loggedIn}}
             <div class="user-enter">
             <div class="user-profile">
-                <p class="user-name">d</p>
+                <p class="user-name">&#128516;</p>
             </div>
             <div class="user-comment">
                 <form class="user-comment-form">
-                    <input type="text" id="home-comment" placeholder="Add comment...">
+                    <input type="text" id="home-comment" placeholder="Add a comment...">
                     <button>Comment</button>
                 </form>
             </div>
         </div>
+        {{#each blog.comments}}
         <div class="other-comments">
             <div class="home-other-comment">
-                <div class="other-name-time">
+                {{!-- <div class="other-name-time">
                     <p>3h ago</p>
-                </div>
+                </div> --}}
                 <div class="other-body">
-                    <p>{{comments.comment}}</p>
+                    <p>{{comment}}</p>
                 </div>
             </div>
         </div>
+        {{/each}}
         {{else}}
         <div class="home-comment-message message-button">
             <p>You must be logged in to comment</p>
@@ -54,5 +56,4 @@
     </div>
 </div>
 {{/each}}
-
     

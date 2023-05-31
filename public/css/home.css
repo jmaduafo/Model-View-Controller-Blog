@@ -107,6 +107,10 @@
     cursor: pointer;
 }
 
+.blog-title h2 {
+    text-transform: capitalize;
+}
+
 /* --------NOT LOGGED IN COMMENTS----------- */
 /* .home-comments {
     display: none;

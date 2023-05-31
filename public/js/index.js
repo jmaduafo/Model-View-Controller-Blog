@@ -21,10 +21,6 @@ function arrowSwitch() {
 
 arrowSwitch();
 
-console.log(commentIcon);
-// for (let i = 0; i < commentIcon.length; i++) {
-//     commentIcon[i].addEventListener("click", function() {
-//         homeComments[i].setAttribute
-//     })
+// function hide() {
+//     homeComments.classList.toggle("display");
 // }
-

@@ -26,6 +26,6 @@ button:hover {
     cursor: pointer;
 }
 
-input {
+input, button, textarea {
     font-family: "Quicksand", sans-serif;
 }

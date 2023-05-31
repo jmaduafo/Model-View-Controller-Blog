@@ -124,8 +124,8 @@ router.get('/', async (req, res) => {
 // });
 
 
-router.get('/new', (req, res) => {
-    res.render('dashboard');
-});
+// router.get('/new', (req, res) => {
+//     res.render('dashboard');
+// });
 
 module.exports = router;

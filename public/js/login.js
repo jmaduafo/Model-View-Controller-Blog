@@ -4,6 +4,8 @@ const loginFormHandler = async (event) => {
   
     const email = document.querySelector('#email-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
+
+    // const userCircle = document.querySelector('.user-name');
   
     if (email && password) {
       const response = await fetch('/api/users/login', {
@@ -15,8 +17,7 @@ const loginFormHandler = async (event) => {
       if (response.ok) {
         document.location.replace('/');
         // If response is okay, take the first string of the username and append it to circle
-        console.log(response.username);
-        userCircle.innerText = response.username.substring(0,1);
+        // userCircle.innerText = email.substring(0,1);
       } else {
         alert('Failed to log in.');
       }
@@ -30,6 +31,8 @@ const signupFormHandler = async (event) => {
     const username = document.querySelector('#username-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
+
+    // const userCircle = document.querySelector('.user-name');
   
     if (email && username && password) {
       const response = await fetch('/api/users', {
@@ -39,7 +42,7 @@ const signupFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/login');
+        // userCircle.innerText = email.substring(0,1);
       } else {
         alert('Failed to sign up.');
       }
@@ -47,9 +50,7 @@ const signupFormHandler = async (event) => {
   };
   
   document
-    .querySelector('.login')
-    .addEventListener('submit', loginFormHandler);
+    .querySelector('.login')?.addEventListener('submit', loginFormHandler);
   
   document
-    .querySelector('.signup')
-    .addEventListener('submit', signupFormHandler);
+    .querySelector('.signup')?.addEventListener('submit', signupFormHandler);

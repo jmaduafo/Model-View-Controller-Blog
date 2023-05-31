@@ -6,9 +6,6 @@ router.get('/', async (req, res) => {
   try {
     const dbUserData = await User.findAll({
       attributes: { exclude: ["password"]},
-      where: {
-        id: req.params.id
-      },
       include: [
         {
           model: Blogs,

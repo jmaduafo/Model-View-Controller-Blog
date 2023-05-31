@@ -1,16 +1,17 @@
+{{#each blogs as |blog| }}
 <div class="home-blog-card">
     <div class="top-section">
         <div class="blog-title">
-            <h2>The Importance of Authentication</h2>
+            <h2>{{title}}</h2>
         </div>
         <div class="blog-user-created">
-            <p>ArmaniLove23</p>
+            <p>{{user.username}}</p>
             <p>5 days ago</p>
         </div>
     </div>
     <div class="middle-section">
         <div class="blog-body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, corrupti excepturi veritatis nemo obcaecati officia neque nostrum in et! Excepturi, architecto eius! Hic sed fuga quaerat, praesentium quae illum iure?</p>
+            <p>{{body}}</p>
         </div>
     </div>
     <div class="bottom-section">
@@ -23,7 +24,7 @@
     </div>
     <div class="home-comments">
         {{#if loggedIn}}
-        <div class="user-enter">
+            <div class="user-enter">
             <div class="user-profile">
                 <p class="user-name">d</p>
             </div>
@@ -37,22 +38,10 @@
         <div class="other-comments">
             <div class="home-other-comment">
                 <div class="other-name-time">
-                    <p>marcopolo43</p>
                     <p>3h ago</p>
                 </div>
                 <div class="other-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, consectetur! Illo molestias beatae distinctio! Ab recusandae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="other-comments">
-            <div class="home-other-comment">
-                <div class="other-name-time">
-                    <p>marcopolo43</p>
-                    <p>3h ago</p>
-                </div>
-                <div class="other-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, consectetur! Illo molestias beatae distinctio! Ab recusandae.</p>
+                    <p>{{comments.comment}}</p>
                 </div>
             </div>
         </div>
@@ -62,142 +51,8 @@
             <a href="/login"><button>LOG IN</button></a>
         </div>
         {{/if}}
-        
     </div>
 </div>
-<div class="home-blog-card">
-    <div class="top-section">
-        <div class="blog-title">
-            <h2>The Importance of Authentication</h2>
-        </div>
-        <div class="blog-user-created">
-            <p>ArmaniLove23</p>
-            <p>5 days ago</p>
-        </div>
-    </div>
-    <div class="middle-section">
-        <div class="blog-body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, corrupti excepturi veritatis nemo obcaecati officia neque nostrum in et! Excepturi, architecto eius! Hic sed fuga quaerat, praesentium quae illum iure?</p>
-        </div>
-    </div>
-    <div class="bottom-section">
-        <div class="blog-comment-count">
-            <p>0 comments</p>
-        </div>
-        <div class="blog-comment-icon">
-            <i class='bx bxs-comment-detail bx-sm'></i>
-        </div>
-    </div>
-    <div class="home-comments">
-        {{#if loggedIn}}
-        <div class="user-enter">
-            <div class="user-profile">
-                <p class="user-name">d</p>
-            </div>
-            <div class="user-comment">
-                <form class="user-comment-form">
-                    <input type="text" id="home-comment" placeholder="Add comment...">
-                    <button>Comment</button>
-                </form>
-            </div>
-        </div>
-        <div class="other-comments">
-            <div class="home-other-comment">
-                <div class="other-name-time">
-                    <p>marcopolo43</p>
-                    <p>3h ago</p>
-                </div>
-                <div class="other-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, consectetur! Illo molestias beatae distinctio! Ab recusandae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="other-comments">
-            <div class="home-other-comment">
-                <div class="other-name-time">
-                    <p>marcopolo43</p>
-                    <p>3h ago</p>
-                </div>
-                <div class="other-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, consectetur! Illo molestias beatae distinctio! Ab recusandae.</p>
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="home-comment-message message-button">
-            <p>You must be logged in to comment</p>
-            <a href="/login"><button>LOG IN</button></a>
-        </div>
-        {{/if}}
-        
-    </div>
-</div>
-<div class="home-blog-card">
-    <div class="top-section">
-        <div class="blog-title">
-            <h2>The Importance of Authentication</h2>
-        </div>
-        <div class="blog-user-created">
-            <p>ArmaniLove23</p>
-            <p>5 days ago</p>
-        </div>
-    </div>
-    <div class="middle-section">
-        <div class="blog-body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, corrupti excepturi veritatis nemo obcaecati officia neque nostrum in et! Excepturi, architecto eius! Hic sed fuga quaerat, praesentium quae illum iure?</p>
-        </div>
-    </div>
-    <div class="bottom-section">
-        <div class="blog-comment-count">
-            <p>21 comments</p>
-        </div>
-        <div class="blog-comment-icon">
-            <i class='bx bxs-comment-detail bx-sm'></i>
-        </div>
-    </div>
-    <div class="home-comments">
-        {{#if loggedIn}}
-        <div class="user-enter">
-            <div class="user-profile">
-                <p class="user-name">d</p>
-            </div>
-            <div class="user-comment">
-                <form class="user-comment-form">
-                    <input type="text" id="home-comment" placeholder="Add comment...">
-                    <button>Comment</button>
-                </form>
-            </div>
-        </div>
-        <div class="other-comments">
-            <div class="home-other-comment">
-                <div class="other-name-time">
-                    <p>marcopolo43</p>
-                    <p>3h ago</p>
-                </div>
-                <div class="other-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, consectetur! Illo molestias beatae distinctio! Ab recusandae.</p>
-                </div>
-            </div>
-        </div>
-        <div class="other-comments">
-            <div class="home-other-comment">
-                <div class="other-name-time">
-                    <p>marcopolo43</p>
-                    <p>3h ago</p>
-                </div>
-                <div class="other-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, consectetur! Illo molestias beatae distinctio! Ab recusandae.</p>
-                </div>
-            </div>
-        </div>
-        {{else}}
-        <div class="home-comment-message message-button">
-            <p>You must be logged in to comment</p>
-            <a href="/login"><button>LOG IN</button></a>
-        </div>
-        {{/if}}
-        
-    </div>
-</div>
+{{/each}}
 
     

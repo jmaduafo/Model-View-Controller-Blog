@@ -5,11 +5,11 @@ const { User, Blogs, Comments } = require("../models");
 router.get('/', async (req, res) => {
     try {
       const dbBlogsData = await Blogs.findAll({
-        attributes: ["id", "title", "body", "user_id"],
+        attributes: ["id", "title", "body", 'date_created', "user_id"],
         include: [
           {
             model: Comments,
-            attributes: ["id", "comment", "user_id", "blog_id"],
+            attributes: ["id", "comment", 'date_created', "user_id", "blog_id"],
             include: {
               model: User,
               attributes: ["username"]
@@ -49,6 +49,7 @@ router.get('/post/:id', (req, res) => {
         'id',
         'title',
         'body',
+        'date_created',
         'user_id'
         ],
         include: [
@@ -57,6 +58,7 @@ router.get('/post/:id', (req, res) => {
             attributes: [
             'id',
             'comment',
+            'date_created',
             'user_id',
             'blog_id'
             ],

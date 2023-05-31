@@ -6,7 +6,7 @@
         </div>
         <div class="blog-user-created">
             <p>{{blog.user.username}}</p>
-            {{!-- <p>5 days ago</p> --}}
+            <p>{{format_date blog.date_created}}</p>
         </div>
     </div>
     <div class="middle-section">
@@ -38,9 +38,9 @@
         {{#each blog.comments}}
         <div class="other-comments">
             <div class="home-other-comment">
-                {{!-- <div class="other-name-time">
-                    <p>3h ago</p>
-                </div> --}}
+                <div class="other-name-time">
+                    <p>{{format_date date_created}}</p>
+                </div>
                 <div class="other-body">
                     <p>{{comment}}</p>
                 </div>

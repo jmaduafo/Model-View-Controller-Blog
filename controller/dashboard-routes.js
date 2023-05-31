@@ -10,8 +10,8 @@ router.get('/', async (req, res) => {
         where: {
             id: req.session.id
         },
-        attributes: ["id", "title", "body", "user_id"],
-        // order: [["created_at", "DESC"]],
+        attributes: ["id", "title", "body", 'date_created', "user_id"],
+        order: [["date_created", "DESC"]],
         include: [
           {
             model: User,
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
           },
           {
             model: Comments,
-            attributes: ["id", "comment", "user_id", "blog_id"],
+            attributes: ["id", "comment", 'date_created', "user_id", "blog_id"],
             include: {
               model: User,
               attributes: ["username"]
@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
     }
   });
 
-router.get('/modify/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Blogs.findByPk({
 
         where: {
@@ -53,6 +53,7 @@ router.get('/modify/:id', (req, res) => {
         'id',
         'title',
         'body',
+        'date_created',
         'user_id'
         ],
         include: [
@@ -65,6 +66,7 @@ router.get('/modify/:id', (req, res) => {
                 attributes: [
                 'id',
                 'comment',
+                'date_created',
                 'user_id',
                 'blog_id'
                 ],
@@ -98,7 +100,7 @@ router.get('/modify/:id', (req, res) => {
 
 
 router.get('/new', (req, res) => {
-    res.render('new-blog');
+    res.render('dashboard');
 });
 
 module.exports = router;

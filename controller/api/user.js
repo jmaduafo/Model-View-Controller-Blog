@@ -9,11 +9,11 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Blogs,
-          attributes: ['id', 'title', 'body', 'user_id']
+          attributes: ['id', 'title', 'body', 'date_created', 'user_id']
         },
         {
           model: Comments,
-          attributes: ['id', 'comment', 'user_id', 'blog_id']
+          attributes: ['id', 'comment', 'date_created', 'user_id', 'blog_id']
         }
       ]
     });
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
 // GET ONE USER
 router.get('/:id', async (req, res) => {
   try {
-    const dbUserData = await User.findByPk({
+    const dbUserData = await User.findOne({
       attributes: { exclude: ["password"]},
       where: {
         id: req.params.id
@@ -36,11 +36,11 @@ router.get('/:id', async (req, res) => {
       include: [
         {
           model: Blogs,
-          attributes: ['id', 'title', 'body', 'user_id']
+          attributes: ['id', 'title', 'body', 'date_created', 'user_id']
         },
         {
           model: Comments,
-          attributes: ['id', 'comment', 'user_id', 'blog_id']
+          attributes: ['id', 'comment', 'date_created', 'user_id', 'blog_id']
         }
       ]
     });

@@ -6,8 +6,8 @@ const withAuth = require("../../utils/auth")
 router.get('/', async (req, res) => {
   try {
     const dbBlogsData = await Blogs.findAll({
-      attribute: ['id', "title", "body", "user_id"],
-      // order: [["created_at", "DESC"]],
+      attribute: ['id', "title", "body", "date_created", "user_id"],
+      order: [["date_created", "DESC"]],
       include: [
         {
           model: User,
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         },
         {
           model: Comments,
-          attributes: ['id', "comment", "user_id", "blog_id"],
+          attributes: ['id', "comment", "date_created", "user_id", "blog_id"],
           include: {
             model: User,
             attributes: ["username"]
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const dbBlogData = await Blogs.findByPk(req.params.id, {
-      attribute: ["id", "title", "body", "user_id"],
+      attribute: ["id", "title", "body", "date_created", "user_id"],
       include: [
         {
           model: User,
@@ -51,7 +51,7 @@ router.get('/:id', async (req, res) => {
         },
         {
           model: Comments,
-          attributes: ["id", "comment", "user_id", "blog_id"],
+          attributes: ["id", "comment", "date_created", "user_id", "blog_id"],
           include: {
             model: User,
             attributes: ["id", "username"]
@@ -76,6 +76,7 @@ router.post('/', withAuth, async (req, res) => {
     const newBlog = await Blogs.create({
       title: req.body.title,
       body: req.body.body,
+      date_created: req.body.date_created,
       user_id: req.body.user_id
     });
     res.status(201).json(newBlog);
@@ -91,6 +92,7 @@ router.put('/:id', async (req, res) => {
       {
         title: req.body.title,
         body: req.body.body,
+        date_created: req.body.date_created,
         user_id: req.body.user_id,
       },
       {

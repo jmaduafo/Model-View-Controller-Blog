@@ -6,26 +6,51 @@
                 <div class="top-banner">
                     <a href="/dashboard">
                     <div class="user-circle">
-                        {{#if loggedIn}}
                         <p class="user-name">&#128516;</p>
-                        {{else}}
-                        <p>?</p>
-                        {{/if}}
                     </div>
                     </a>
-                    <a href="/dashboard/modify/{{id}}"><div class="create-blog">
+                    <div class="create-blog">
                         <i class='bx bxs-paper-plane'></i>
-                        <p>Create a Blog</p>
-                    </div></a>
+                        <p>Make a Post!</p>
+                    </div>
                 </div>
                 <div class="dashboard-textarea">
                     <div class="textarea-left">
                         <form class="dashboard-text">
-                            <textarea type="text" id="blog-create" rows="5"></textarea>
-                            <button>Share Post</button>
+                            <div class="dashboard-title-text">
+                                <textarea type="text" id="blog-title" rows="1" placeholder="Title..."></textarea>
+                                <textarea type="text" id="blog-body" rows="5" placeholder="What do you want to say?..."></textarea>
+                            </div>
+                            <button id="blog-submit">Share Post</button>
                         </form>
                     </div>
                 </div>
+                {{!-- {{#if blog.length}} --}}
+                <div class="home-blog-card">
+                    <div class="top-section">
+                        <div class="blog-title">
+                            <h2>{{id}}</h2>
+                        </div>
+                        <div class="blog-user-created">
+                            <p>{{username}}</p>
+                            <p>{{format_date date_created}}</p>
+                        </div>
+                    </div>
+                    <div class="middle-section">
+                        <div class="blog-body">
+                            <p>{{blog.body}}</p>
+                        </div>
+                    </div>
+                    <div class="bottom-section">
+                        <div class="blog-comment-count">
+                            
+                        </div>
+                        <div class="blog-comment-icon">
+                            <i class='bx bxs-comment-detail bx-sm'></i>
+                        </div>
+                    </div>
+                </div>
+                {{!-- {{/if}} --}}
             </div>
         </div>
     </div>

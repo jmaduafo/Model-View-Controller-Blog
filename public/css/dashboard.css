@@ -68,9 +68,12 @@
     justify-content: space-around;
     align-items: center;
 }
+.dashboard-title-text {
+    width: 70%;
+}
 
 .dashboard-text textarea {
-    width: 70%;
+    width: 100%;
     border: none;
     outline: none;
     border-radius: 10px;

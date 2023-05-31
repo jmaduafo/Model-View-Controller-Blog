@@ -1,47 +1,45 @@
-var existingBlogs = document.querySelector("#existingblogs")
-var createNew = document.querySelector("#createNew")
-var newPost = document.querySelector("#newpost")
-var newBlog = document.querySelector('#newBlog')
+const newFormHandler = async (event) => {
+	event.preventDefault();
 
-function hideCreateNew() {
-    createNew.hidden=true;
-}
+	const title = document.querySelector('#blog-title').value.trim();
 
-hideCreateNew();
+	const description = document.querySelector('#blog-body').value.trim();
 
-newPost.addEventListener("submit",event=>{
-    event.preventDefault()
-    console.log('click')
-    existingBlogs.hidden=true;
-    newPost.hidden =true;
-    createNew.hidden =false;
-});
+	if (title && description) {
+		const response = await fetch(`/api/posts`, {
+			method: 'POST',
+			body: JSON.stringify({ title, description }),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
-newBlog.addEventListener("submit", event => {
-    var title = document.querySelector("#title").value;
-    var content = document.querySelector("#content").value
-    event.preventDefault()
-    console.log('you clicked me')
-    if (!title || !content) {
-        alert('Please enter both title and content')
-        return;
-    }
-    const blogObj = {
-        title: title,
-        content: content,
-    }
-    fetch("/api/blogs",{
-        method:"POST",
-        body:JSON.stringify(blogObj),
-        headers:{
-            "Content-Type":"application/json"
-        }
-    }).then(res=>{
-        if(res.ok){
-            createNew.setAttribute("hidden", "false")
-            location.reload()
-        } else {
-            alert("Error - please try again")
-        }
-    })
-})
+		if (response.ok) {
+			document.location.replace('/dashboard');
+		} else {
+			alert('Failed to create blog');
+		}
+	}
+};
+
+const deleteButtonHandler = async (event) => {
+	if (event.target.hasAttribute('data-id')) {
+		const id = event.target.getAttribute('data-id');
+
+		const response = await fetch(`/api/posts/${id}`, {
+			method: 'DELETE',
+		});
+
+		if (response.ok) {
+			document.location.replace('/dashboard');
+		} else {
+			alert('Failed to delete blog');
+		}
+	}
+};
+
+document
+	.querySelector('#blog-submit')?.addEventListener('submit', newFormHandler);
+
+document
+	.querySelector('.blog-list')?.addEventListener('click', deleteButtonHandler);

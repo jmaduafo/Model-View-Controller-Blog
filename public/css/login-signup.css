@@ -126,3 +126,21 @@
 .login-contents .circle {
     top: 33%;
 }
+
+@media screen and (max-width: 767px) {
+    .login-contents, .signup-contents {
+        width: 85%;  
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .login-contents, .signup-contents {
+        width: 65%;  
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1300px)  {
+    .login-contents, .signup-contents {
+        width: 45%;  
+    }
+}

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Blogs, User, Comments } = require("../models");
 const withAuth = require("../utils/auth");
 
-// GET all blogs for homepage
+// GET all blogs for dashboard
 router.get('/', async (req, res) => {
     try {
       const dbBlogsData = await Blogs.findAll({
@@ -41,62 +41,87 @@ router.get('/', async (req, res) => {
       res.status(500).json(err);
     }
   });
+  
+// GET all blogs for dashboard
+// router.get('/', withAuth, async (req, res) => {
+//   try {
+// 		const userData = await User.findByPk(req.session.user_id, {
+// 			attributes: {
+// 				exclude: ['password']
+// 			},
+// 			include: [{
+// 				model: Blogs
+// 			}],
+// 		});
 
-router.get('/:id', (req, res) => {
-    Blogs.findByPk({
+// 		const user = userData.get({
+// 			plain: true
+// 		});
 
-        where: {
-            id: req.params.id
-        },
+// 		res.render('dashboard', {
+// 			...user,
+// 			logged_in: req.session.loggedIn,
+// 		});
+// 	} catch (err) {
+// 		res.status(500).json(err);
+// 	}
+// })
 
-        attributes: [
-        'id',
-        'title',
-        'body',
-        'date_created',
-        'user_id'
-        ],
-        include: [
-            {
-                model: User,
-                attributes: ['username']
-            },
-            {
-                model: Comments,
-                attributes: [
-                'id',
-                'comment',
-                'date_created',
-                'user_id',
-                'blog_id'
-                ],
-                include: {
-                    model: User,
-                    attributes: ['username']
-            }
-        },
+// router.get('/:id', (req, res) => {
+//     Blogs.findByPk({
+
+//         where: {
+//             id: req.params.id
+//         },
+
+//         attributes: [
+//         'id',
+//         'title',
+//         'body',
+//         'date_created',
+//         'user_id'
+//         ],
+//         include: [
+//             {
+//                 model: User,
+//                 attributes: ['username']
+//             },
+//             {
+//                 model: Comments,
+//                 attributes: [
+//                 'id',
+//                 'comment',
+//                 'date_created',
+//                 'user_id',
+//                 'blog_id'
+//                 ],
+//                 include: {
+//                     model: User,
+//                     attributes: ['username']
+//             }
+//         },
         
-        ]
-    })
-    .then(dbBlogData => {
-        if (!dbBlogData) {
-            res.status(404).json({ message: 'No Post found with this id' });
-            return;
-        }
-        //serialize the data
-        const blog = dbBlogData.get({ plain: true });
+//         ]
+//     })
+//     .then(dbBlogData => {
+//         if (!dbBlogData) {
+//             res.status(404).json({ message: 'No Post found with this id' });
+//             return;
+//         }
+//         //serialize the data
+//         const blog = dbBlogData.get({ plain: true });
 
-        //pass data to the template
-        res.render('modify-blog', {
-            blog, 
-            loggedIn: req.session.loggedIn
-        });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
+//         //pass data to the template
+//         res.render('modify-blog', {
+//             blog, 
+//             loggedIn: req.session.loggedIn
+//         });
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     });
+// });
 
 
 router.get('/new', (req, res) => {

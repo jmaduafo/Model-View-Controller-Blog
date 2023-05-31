@@ -42,6 +42,7 @@ const signupFormHandler = async (event) => {
       });
   
       if (response.ok) {
+        document.location.replace('/');
         // userCircle.innerText = email.substring(0,1);
       } else {
         alert('Failed to sign up.');

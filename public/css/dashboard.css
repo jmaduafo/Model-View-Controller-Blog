@@ -89,3 +89,40 @@
     background-color: white;
 }
 
+@media screen and (max-width: 767px) {
+    .dashboard-content {
+        width: 90%;
+    }
+    .dashboard-access {
+        margin-top: 6em;
+    }
+
+    .login-message {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .dashboard-content {
+        width: 70%;
+    }
+    .dashboard-access {
+        margin-top: 6em;
+    }
+    .login-message {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1300px)  {
+    .dashboard-content {
+        width: 50%;
+    }
+    .dashboard-access {
+        margin-top: 6em;
+    }
+    .login-message {
+        width: 40%;
+    }
+}
+

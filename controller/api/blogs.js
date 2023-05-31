@@ -39,6 +39,42 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/', withAuth, async (req, res) => {
+  try {
+    const dbBlogsData = await Blogs.findAll({
+      attribute: ['id', "title", "body", "date_created", "user_id"],
+      order: [["date_created", "DESC"]],
+      include: [
+        {
+          model: User,
+          attributes: ["username"]
+        },
+        {
+          model: Comments,
+          attributes: ['id', "comment", "date_created", "user_id", "blog_id"],
+          include: {
+            model: User,
+            attributes: ["username"]
+          }
+        },
+      ],
+    });
+
+    // const blogs = dbBlogsData.map((blog) =>
+    //   blog.get({ plain: true })
+    // );
+    // res.render('homepage', {
+    //   blogs,
+    //   loggedIn: req.session.loggedIn,
+    // });
+
+    res.json(dbBlogsData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // GET one blog
 router.get('/:id', async (req, res) => {
   try {

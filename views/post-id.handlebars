@@ -1,17 +1,16 @@
-{{#each blogs as |blog|}}
-<a href="/post/{{blog.id}}"><div class="home-blog-card">
+<div class="home-blog-card">
     <div class="top-section">
         <div class="blog-title">
-            <h2>{{blog.title}}</h2>
+            <h2>{{title}}</h2>
         </div>
         <div class="blog-user-created">
-            <p>{{blog.user.username}}</p>
-            <p>{{format_date blog.date_created}}</p>
+            <p>{{user.username}}</p>
+            <p>{{format_date date_created}}</p>
         </div>
     </div>
     <div class="middle-section">
         <div class="blog-body">
-            <p>{{blog.body}}</p>
+            <p>{{body}}</p>
         </div>
     </div>
     <div class="bottom-section">
@@ -34,7 +33,7 @@
                 </form>
             </div>
         </div>
-        {{#each blog.comments}}
+        {{#each comments}}
         <div class="other-comments">
             <div class="home-other-comment">
                 <div class="other-name-time">
@@ -53,6 +52,4 @@
         </div>
         {{/if}}
     </div>
-</div></a>
-{{/each}}
-    
+</div>
